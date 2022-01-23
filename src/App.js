@@ -4,6 +4,8 @@ import Footer from './Components/Footer';
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
 import Home from './Views/Home';
 import About from './Views/About';
+import Contact from './Views/Contact';
+import Product from './Views/Product';
 
 
 function App() {
@@ -21,6 +23,15 @@ function App() {
             <Route path = "/about" element={<About/>}>
                 <About/>
             </Route>
+
+            <Route path = "/contact" element={<Contact/>}>
+              <Contact/>
+            </Route>
+
+            <Route path = "/product/:id" element = {<Product/>}>
+              <Product/>
+            </Route>
+
         </Routes>
       </div>
 
