@@ -1,10 +1,69 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import axios from "axios";
+import Loader from "../Components/Loader";
+import ProductCard from "../Components/ProductCard";
 
 function Home(){
+    
+    const url = `https://61ec8943f3011500174d21a8.mockapi.io/product?page=1&limit=10`
+    
+    const [products,setProducts] = useState({
+        loading:false,
+        data:null,
+        error:false
+    })
+    useEffect(()=>{
+        setProducts({
+            loading:true,
+            data:null,
+            error:false
+        })
+        axios.get(url)
+        .then(response =>{
+            setProducts({
+                loading:false,
+                data:response.data,
+                error:false
+            })
+        })
+        .catch(()=>{
+            setProducts({
+                loading:false,
+                data:null,
+                error:true
+            })
+        })
+    },[url])
+
+
+    let content = null;
+
+    if(products.loading){
+        content = <Loader></Loader>
+    }
+    if(products.error){
+        content = <p>
+            There was an error please Refresh or try again later
+        </p>
+    }
+
+    if(products.data){
+        content = products.data.map((currentProduct) => 
+            <div key = {currentProduct.id}>
+                <ProductCard product = {currentProduct}/>
+            </div>
+        )
+        
+    }
+
+
+
     return(
         <div>
-            <h1 className="font-bold mb-3 text-2xl">Home Page</h1>
-            <p>This is home page content</p>
+            <h1 className="font-bold mb-3 text-2xl">
+                Best Sellers
+            </h1>
+            {content}
     
         </div>
     )
