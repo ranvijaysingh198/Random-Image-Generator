@@ -1,40 +1,14 @@
-import React,{useState,useEffect} from "react";
-import axios from "axios";
+import React from "react";
 import Loader from "../Components/Loader";
 import ProductCard from "../Components/ProductCard";
+import useAxiosGet from "../Hooks/HttpRequests";
 
 function Home(){
     
     const url = `https://61ec8943f3011500174d21a8.mockapi.io/product?page=1&limit=10`
     
-    const [products,setProducts] = useState({
-        loading:false,
-        data:null,
-        error:false
-    })
-    useEffect(()=>{
-        setProducts({
-            loading:true,
-            data:null,
-            error:false
-        })
-        axios.get(url)
-        .then(response =>{
-            setProducts({
-                loading:false,
-                data:response.data,
-                error:false
-            })
-        })
-        .catch(()=>{
-            setProducts({
-                loading:false,
-                data:null,
-                error:true
-            })
-        })
-    },[url])
-
+    
+    let products = useAxiosGet(url);
 
     let content = null;
 
@@ -61,7 +35,7 @@ function Home(){
     return(
         <div>
             <h1 className="font-bold mb-3 text-2xl">
-                Best Sellers
+                Random Image Generator
             </h1>
             {content}
     

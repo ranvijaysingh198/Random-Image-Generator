@@ -1,7 +1,5 @@
-
 import React, { useState } from "react";
 import { FaBars } from 'react-icons/fa';
-// import {IoMdArrowDropdown} from 'react-icons/io'
 import {useTransition,animated} from "react-spring";
 import NavigationMenu from "./NavigationMenu";
 
@@ -9,7 +7,6 @@ import NavigationMenu from "./NavigationMenu";
 
 function Navigation(){
     const [showMenu,setShowMenu] = useState(false);
-    // const [dropMenu,setDropMenu] = useState(false);
 
     const maskTransitions = useTransition(showMenu, {
         from: { position:'absolute',opacity: 0 },
@@ -25,16 +22,6 @@ function Navigation(){
        
       })
 
-//   let dropDown
-//     if(dropMenu){
-//         dropDown = 
-//         <ul>
-//         <li>Item 1</li>
-//         <li>Item 2</li>
-//         <li>Item 3</li>
-//     </ul>
-//     }
-    
     return (
         <nav>
             <span className="text-xl">
